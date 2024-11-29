@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+{% include "navbar.html" %}
+
+<main class="flex-grow-1">
+    <div class="container-lg mt-4">
+        <div class="row">
+            <div class="mx-auto p-5 border bg-white info-block-width mt-4">
+                <div class="mb-2">ID: {{ user_data.id }}</div>
+                <div class="mb-2 fw-bold">{{ user_data.company }}</div>
+                <div class="d-flex flex-column">
+                    <div class="d-flex align-items-center">
+                        <div class="text-start" style="width: 350px;">Поступило релевантных лидов за 1 день:</div>
+                        <div class="me-4 text-end" style="width: 50px;">{{ user_data.incoming_leads }}</div>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                        <div class="text-start" style="width: 300px;">Отправлено лидов за 1 день:</div>
+                        <div class="me-4 text-end" style="width: 100px;">{{ user_data.outgoing_leads }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main class="flex-grow-1 mb-4">
+    <div class="container-lg mt-4">
+        <div class="row">
+            <div class="mx-auto p-5 border bg-white info-block-width mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>Графики</div>
+                </div>
+                <img src="{{ url_for('static', filename='images/chart_example.png') }}" alt="Expobank Logo" width="500" height="400">
+                <img src="{{ url_for('static', filename='images/chart_example_2.png') }}" alt="Expobank Logo" width="500" height="400">
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

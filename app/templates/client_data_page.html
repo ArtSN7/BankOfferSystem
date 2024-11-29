@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block body %}
+{% include "navbar.html" %}
+
+<main class="flex-grow-1">
+    <div class="container-lg mt-4">
+        {% include "alerts.html" %}
+        <div class="row">
+            <div class="mx-auto p-4 border bg-white info-block-width mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="h5">Обработка релевантных лидов</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div class="mb-2">
+                        На состояние
+                        <span class="fw-bold">{{ curr_date }}г.</span>
+                        в очереди для загрузки
+                        <span class="fw-bold">5</span>
+                        релевантных лидов
+                    </div>
+
+                    <form action="{{ url_for('clients') }}" method="POST">
+                        <button type="submit" name="load_data" class="btn login-btn-bg text-white fw-bold">Загрузить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<main class="flex-grow-1 mb-4">
+    <div class="container-lg mt-4">
+        <div class="row">
+            <div class="mx-auto p-4 border bg-white info-block-width mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="h5">Релевантные лиды</div>
+                </div>
+
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Ф.И.О.</th>
+                            <th scope="col">Телефон</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Кросс-услуга</th>
+                            <th scope="col">Дата получения лида</th>
+                            <th scope="col">Рейтинг</th>
+                            <th scope="col">Статус обработки</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-size-sm">
+                        {% for lead in all_leads_data %}
+                        <tr>
+                            <td>{{ lead.user_id }}</td>
+                            <td>{{ lead.name }}</td>
+                            <td>{{ lead.phone_number }}</td>
+                            <td>{{ lead.email }}</td>
+                            <td>{{ lead.cross_usluga }}</td>
+                            <td>{{ lead.date_of_lead }}</td>
+                            <td>{{ lead.rate_of_lead }}%</td>
+                            <td>{{ lead.is_complete }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <form action="{{ url_for('clients') }}" method="POST">
+                        <button type="submit" name="download" class="btn login-btn-bg text-white fw-bold">Скачать данные</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/activate_nav_item_clients.js') }}"></script>
+
+{% endblock %}

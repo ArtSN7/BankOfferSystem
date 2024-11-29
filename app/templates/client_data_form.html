@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+{% include "navbar.html" %}
+
+<main class="flex-grow-1">
+    <div class="container-lg mt-4">
+        <div class="row">
+            <div class="mx-auto p-5 border bg-white info-block-width mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="h5">Передача данных</div>
+                </div>
+                <div class="mb-0">Для передачи данных прикрепите файл с данными в одном из форматов:</div>
+                <div class="mb-4">.xls, .xlsx, .csv</div>
+
+                <form action="{{ url_for('send_client_data') }}" method="post" enctype="multipart/form-data">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="file" class="btn bg-light-cyan me-2">
+                            Выбрать файл
+                            <input type="file" name="file" id="file" required onchange="updateFileName()" style="display: none;">
+                        </label>
+                        <span id="file-name" class="me-auto"></span>
+                        <input type="submit" value="Отправить" class="btn login-btn-bg fw-bold text-white">
+                    </div>
+                </form>
+                {% include "text_alerts.html" %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/show_file_attach_name.js') }}"></script>
+<script src="{{ url_for('static', filename='js/activate_nav_item_send_data.js') }}"></script>
+
+{% endblock %}
